@@ -29,8 +29,8 @@ $sakuraExeAbusolutePath = "C:\Program Files (x86)\sakura\sakura.exe"
 ```
 # < User Defintions >----------------------------
 -D'XXX'
--D'IN=TRUE'
--D'QQQ(IN)=(IN?TRUE:FALSE)'
+-D'IN=1'
+-D'QQQ(IN)=(IN?1:0)'
 # ----------------------------</ User Defintions >
 ```
 
