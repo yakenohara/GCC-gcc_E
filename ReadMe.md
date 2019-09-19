@@ -8,7 +8,7 @@ C言語のソースコードファイル(*.c, *.h)内の、
 
 # 準備
 
-1. (※インストール時のみ必要※) サクラエディタのパスを、`gcc_E` 配下の以下2つに対して設定する
+1. (※インストール時のみ必要※) サクラエディタのパスを、`ifdef_switcher` 配下の以下2つに対して設定する
 
  - escape_preprocess.ps1
 ```
@@ -20,7 +20,7 @@ $sakuraExeAbusolutePath = "C:\Program Files (x86)\sakura\sakura.exe"
 $sakuraExeAbusolutePath = "C:\Program Files (x86)\sakura\sakura.exe"
 ```
 
-2. (※インストール時のみ必要※)`gcc_E` フォルダをまるごと好きなところに配置する
+2. (※インストール時のみ必要※)`ifdef_switcher` フォルダをまるごと好きなところに配置する
    
 3. (※変換対象のソースコードの変更毎に必要※) `gcc`コマンド用のオプション定義ファイル `gcc_option.sh` を編集する
 
@@ -36,10 +36,10 @@ $sakuraExeAbusolutePath = "C:\Program Files (x86)\sakura\sakura.exe"
 
 # Usage
 
-`gcc_E\gcc_E.bat` に 変換対象の ソースコード (*.c, *.h) を含んだフォルダを指定してたたく。  
+`ifdef_switcher\ifdef_switcher.bat` に 変換対象の ソースコード (*.c, *.h) を含んだフォルダを指定してたたく。  
 ↓ 同封の `example` フォルダを指定した例 ↓
 ```
-.\gcc_E\gcc_E.bat example > log.txt 2>&1
+.\ifdef_switcher\ifdef_switcher.bat example > log.txt 2>&1
 ```
 上記の例では、`example` フォルダが配置されたディレクトリに、  
 `example_switched` という、`_switched` が付加されたフォルダが生成される。
