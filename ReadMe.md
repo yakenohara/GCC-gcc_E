@@ -6,26 +6,29 @@ C言語のソースコードファイル(*.c, *.h)内の、
  - GCC
  - Sakura Editor (ver 2.2.0.0 or higher)
 
-# 準備
+# Installation
 
-1. (※インストール時のみ必要※) サクラエディタのパスを、`ifdef_switcher` 配下の以下2つに対して設定する
+1. サクラエディタのパスを、`ifdef_switcher` 配下の以下2つに対して設定する
 
- - escape_preprocess.ps1
+ - escape_preprocess.ps1  
+ - restore_escaped.ps1  
+
+↓ 設定例 ↓  
 ```
 $sakuraExeAbusolutePath = "C:\Program Files (x86)\sakura\sakura.exe"
 ```
 
- - restore_escaped.ps1
-```
-$sakuraExeAbusolutePath = "C:\Program Files (x86)\sakura\sakura.exe"
-```
+2. `ifdef_switcher` フォルダをまるごと好きなところに配置する
 
-2. (※インストール時のみ必要※)`ifdef_switcher` フォルダをまるごと好きなところに配置する
+# Usage
+
+## Edit settings before run
    
-3. (※変換対象のソースコードの変更毎に必要※) `gcc`コマンド用のオプション定義ファイル `gcc_option.sh` を編集する
+1. `gcc` コマンド用のオプション定義ファイル `gcc_option.sh` を編集する
 
 `gcc_option.sh` の `User Defintions` 内を編集する  
-↓ 同封のサンプルファイル `example\ex.c` の、`#define` 値、`XXX` と `QQQ(IN)` を有効にする例↓
+
+↓ 同封のサンプルファイル `example\ex.c` の、`#define` 値、`XXX` と `QQQ(IN)` を有効にする例 ↓
 ```
 # < User Defintions >----------------------------
 -D'XXX'
@@ -34,15 +37,15 @@ $sakuraExeAbusolutePath = "C:\Program Files (x86)\sakura\sakura.exe"
 # ----------------------------</ User Defintions >
 ```
 
-# Usage
+## Run
 
 `ifdef_switcher\ifdef_switcher.bat` に 変換対象の ソースコード (*.c, *.h) を含んだフォルダを指定してたたく。  
+
 ↓ 同封の `example` フォルダを指定した例 ↓
 ```
 .\ifdef_switcher\ifdef_switcher.bat example > log.txt 2>&1
 ```
-上記の例では、`example` フォルダが配置されたディレクトリに、  
-`example_switched` という、`_switched` が付加されたフォルダが生成される。
+上記の例では、`example` フォルダの隣に、`example_switched` という、`_switched` が付加されたフォルダが生成される。
 
 ※生成に失敗した場合は 標準出力にエラー内容が出力されます。  
   エラー内容を確認してください。
