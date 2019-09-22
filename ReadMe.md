@@ -1,5 +1,9 @@
 C言語のソースコードファイル(*.c, *.h)内の、  
-コンパイルスイッチを指定して、 GCC が解釈したソースコードを出力する。
+コンパイルスイッチを指定して、 GCC が解釈したソースコードを出力する。  
+  
+Limitation 多すぎ。  
+タブ -> スペース変換して、さらに `\r\n` -> `\n` 変換したソースコードと、  
+このスクリプトが出力したソースコードの Diff を、参考情報として使う程度の代物。
 
 # Requirements
 
@@ -24,9 +28,19 @@ $sakuraExeAbusolutePath = "C:\Program Files (x86)\sakura\sakura.exe"
 
 ## Edit settings before run
    
-1. `gcc` コマンド用のオプション定義ファイル `gcc_option.sh` を編集する
+`gcc` コマンド用のオプション定義ファイル `gcc_option.sh` 内の、`User Defintions` 内を編集する.
+ 
 
-`gcc_option.sh` の `User Defintions` 内を編集する  
+※ Do not use following
+- space characters
+- comment out keyword `<<`
+- return escaping `\`, like as follow
+  ```
+  -D'QQQ(IN)=(IN? \
+              TRUE: \
+              FALSE \
+             )'
+  ```
 
 ↓ 同封のサンプルファイル `example\ex.c` の、`#define` 値、`XXX` と `QQQ(IN)` を有効にする例 ↓
 ```
@@ -52,16 +66,23 @@ $sakuraExeAbusolutePath = "C:\Program Files (x86)\sakura\sakura.exe"
 
 # Limitation
 
- - ソースコード内の改行コード `\r\n` が `\n` に変換されてしまう
-  
+## GCC に起因するもの
+
  - Cgywin の `gcc-core` 環境の場合  
    変換対象のソースコードのパスに日本語が入っていると `No such file or directory` がでることがある
 
  - MSYS2 の `mingw-w64-x86_64-gcc` 環境の場合  
    `gcc macro names must be identifiers` エラーがでて失敗する
 
+## `gcc -E` コマンドに起因するもの
 
- - ファイルの最終行が空文字でない場合は、`gcc -E` で強制的に空行が付加される
- - コメント直前のスペースは `gcc -E` が勝手に詰めてしまう
- - ソースコード内の複数スペースは `gcc -E` が勝手に詰めてしまう
+ - ソースコード内の `#include` は無視する仕様。  
+   無視しないと、指定したインクルードファイル内の全文字列を展開した状態のソースコードが出力されてしまうから。  
+   その為、インクルードファイル内に `#ifdef` スイッチを制御するための `#define` 値を定義している場合は、  
+   `gcc_option.sh` 内のオプションにその `#define` 値を定義して使用する。  
+
+ - タブはスペースに変換されてしまう。タブ幅に対応するスペース幅は制御できない。
+ - ソースコード内の改行コード `\r\n` が `\n` に変換されてしまう
+ - ファイルの最終行が空文字でない場合は、強制的に空行が付加される
+ - ソースコード内の連続したスペースは、勝手に詰めてしまうことがある
   
