@@ -54,8 +54,6 @@ $sakuraExeAbusolutePath = "C:\Program Files (x86)\sakura\sakura.exe"
 
  - ソースコード内の改行コード `\r\n` が `\n` に変換されてしまう
   
- - ソースコード内の空行は削除されてしまう
-
  - Cgywin の `gcc-core` 環境の場合  
    変換対象のソースコードのパスに日本語が入っていると `No such file or directory` がでることがある
 
@@ -63,3 +61,7 @@ $sakuraExeAbusolutePath = "C:\Program Files (x86)\sakura\sakura.exe"
    `gcc macro names must be identifiers` エラーがでて失敗する
 
 
+ - ファイルの最終行が空文字でない場合は、`gcc -E` で強制的に空行が付加される
+ - コメント直前のスペースは `gcc -E` が勝手に詰めてしまう
+ - ソースコード内の複数スペースは `gcc -E` が勝手に詰めてしまう
+  
