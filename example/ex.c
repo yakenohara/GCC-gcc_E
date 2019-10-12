@@ -5,7 +5,7 @@
 # if QQQ(IN)
     #include <stdio.h>
 # endif
-
+ 	   
 void main(int argc, char *argv[]){
     int i;
     

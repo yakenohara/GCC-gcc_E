@@ -23,8 +23,8 @@ xcopy "%fromDir%" "%tmpDir%" /e /i
 set ps1FileName=escape_preprocess.ps1
 set param=\"%tmpDir%\"
 @echo on
-powershell -ExecutionPolicy Unrestricted "& \"%~dp0%ps1FileName%\" %param%"
-
+powershell -ExecutionPolicy Unrestricted "& \"%~dp0%ps1FileName%\" %param% /r"
+pause
 ::プリプロセス
 @echo off
 set ps1FileName=gcc_recursively.ps1
@@ -43,7 +43,7 @@ goto GCC_ERROR
 set ps1FileName=restore_escaped.ps1
 set param=\"%outDir%\"
 @echo on
-powershell -ExecutionPolicy Unrestricted "& \"%~dp0%ps1FileName%\" %outDir%"
+powershell -ExecutionPolicy Unrestricted "& \"%~dp0%ps1FileName%\" %outDir% /r"
 
 ::作業用ディレクトリ削除
 rm -r -f "%tmpDir%"
