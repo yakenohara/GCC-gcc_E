@@ -24,7 +24,7 @@ set ps1FileName=escape_preprocess.ps1
 set param=\"%tmpDir%\"
 @echo on
 powershell -ExecutionPolicy Unrestricted "& \"%~dp0%ps1FileName%\" %param% /r"
-pause
+
 ::プリプロセス
 @echo off
 set ps1FileName=gcc_recursively.ps1
@@ -49,7 +49,8 @@ powershell -ExecutionPolicy Unrestricted "& \"%~dp0%ps1FileName%\" %outDir% /r"
 rm -r -f "%tmpDir%"
 
 @echo;
-@echo %0 Done!
+@echo Done!
+::@pause
 @exit /B 0
 
 :PARAM_ERROR

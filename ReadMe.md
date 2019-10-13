@@ -2,27 +2,16 @@ C言語のソースコードファイル(*.c, *.h)内の、
 コンパイルスイッチを指定して、 GCC が解釈したソースコードを出力する。  
   
 Limitation 多すぎ。  
-タブ -> スペース変換して、さらに `\r\n` -> `\n` 変換したソースコードと、  
+改行コードが `\n` に強制変換されてしまうので、あらかじめ改行コードを `\n` に変換したソースコードと、  
 このスクリプトが出力したソースコードの Diff を、参考情報として使う程度の代物。
 
 # Requirements
 
- - GCC
- - Sakura Editor (ver 2.2.0.0 or higher)
+ - GCC(パスが通っている事)
 
 # Installation
 
-1. サクラエディタのパスを、`ifdef_switcher` 配下の以下2つに対して設定する
-
- - escape_preprocess.ps1  
- - restore_escaped.ps1  
-
-↓ 設定例 ↓  
-```
-$sakuraExeAbusolutePath = "C:\Program Files (x86)\sakura\sakura.exe"
-```
-
-2. `ifdef_switcher` フォルダをまるごと好きなところに配置する
+`ifdef_switcher` フォルダをまるごと好きなところに配置する
 
 # Usage
 
@@ -81,8 +70,6 @@ $sakuraExeAbusolutePath = "C:\Program Files (x86)\sakura\sakura.exe"
    その為、インクルードファイル内に `#ifdef` スイッチを制御するための `#define` 値を定義している場合は、  
    `gcc_option.sh` 内のオプションにその `#define` 値を定義して使用する。  
 
- - タブはスペースに変換されてしまう。タブ幅に対応するスペース幅は制御できない。
  - ソースコード内の改行コード `\r\n` が `\n` に変換されてしまう
  - ファイルの最終行が空文字でない場合は、強制的に空行が付加される
- - ソースコード内の連続したスペースは、勝手に詰めてしまうことがある
   
