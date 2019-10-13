@@ -17,7 +17,7 @@ Limitation 多すぎ。
 
 ## Edit settings before run
    
-`gcc` コマンド用のオプション定義ファイル `gcc_option.sh` 内の、`User Defintions` 内を編集する.
+1. `gcc` コマンド用のオプション定義ファイル `gcc_option.sh` 内の、`User Defintions` 内を編集する.
  
 
 ※ Do not use following
@@ -32,12 +32,39 @@ Limitation 多すぎ。
   ```
 
 ↓ 同封のサンプルファイル `example\ex.c` の、`#define` 値、`XXX` と `QQQ(IN)` を有効にする例 ↓
-```
+```shellscript
 # < User Defintions >----------------------------
 -D'XXX'
 -D'IN=1'
 -D'QQQ(IN)=(IN?1:0)'
 # ----------------------------</ User Defintions >
+```
+
+2. 文字エンコーディング
+
+以下ファイル内の `$enc_name = "utf-8"` を環境に合わせて編集する  
+
+ - escape_preprocess.ps1  
+ - restore_escaped.ps1  
+
+↓ シフト JIS を設定する例 ↓  
+
+```powershell
+`$enc_name = "shift_jis"`
+```
+※設定可能な文字エンコーディングのリストは、Powershell ターミナルで以下を実行する事で確認可能。  
+
+```powershell
+&{
+    for($cnt = 0; $cnt -lt 65535; $cnt++){
+        try{
+            $enc = [Text.Encoding]::GetEncoding($cnt)
+            $web_name = $enc.WebName
+            $enc_name = $enc.EncodingName
+            Write-Output "$cnt, $web_name, $enc_name"
+        } catch {}
+    }
+}
 ```
 
 ## Run
