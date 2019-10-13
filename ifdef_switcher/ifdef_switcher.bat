@@ -33,7 +33,7 @@ set outDir=%fromDir%_switched
 
 ::作業用ディレクトリ作成
 if EXIST "%tmpDir%" (
-rm -r -f "%tmpDir%"
+rmdir /s /q "%tmpDir%"
 )
 xcopy "%fromDir%" "%tmpDir%" /e /i
 
@@ -65,7 +65,7 @@ set param=\"%outDir%\"
 powershell -ExecutionPolicy Unrestricted "& \"%~dp0%ps1FileName%\" %outDir% /r"
 
 ::作業用ディレクトリ削除
-rm -r -f "%tmpDir%"
+rmdir /s /q "%tmpDir%"
 
 @echo;
 @echo Done!
