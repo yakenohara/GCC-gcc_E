@@ -21,12 +21,16 @@
 # Do not use following
 # - space characters
 # - comment out keyword `<<`
+# - single quoted string, like as follow. Use double quoted string instead.
+#   ```
+#   -D'IN=1'
+#   ```
 # - return escaping `\`, like as follow
 #   ```
-#   -D'QQQ(IN)=(IN? \
+#   -D"QQQ(IN)=(IN? \
 #               TRUE: \
 #               FALSE \
-#              )'
+#              )"
 #   ```
 # ------------------------------------------------------------------------------------------------------</Limitation>
 
@@ -37,7 +41,7 @@
 # -------------------------------------</ Do not change here (This option is necessary for enabling only preprocess)>
 
 # < User Defintions >------------------------------------------------------------------------------------------------
--D'XXX'
--D'IN=1'
--D'QQQ(IN)=(IN?1:0)'
+-D"XXX"
+-D"IN=1"
+-D"QQQ(IN)=(IN?1:0)"
 # -----------------------------------------------------------------------------------------------</ User Defintions >

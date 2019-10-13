@@ -1,9 +1,7 @@
 C言語のソースコードファイル(*.c, *.h)内の、  
 コンパイルスイッチを指定して、 GCC が解釈したソースコードを出力する。  
   
-Limitation 多すぎ。  
-改行コードが `\n` に強制変換されてしまうので、あらかじめ改行コードを `\n` に変換したソースコードと、  
-このスクリプトが出力したソースコードの Diff を、参考情報として使う程度の代物。
+Limitation 多すぎ。注意。  
 
 # Requirements
 
@@ -23,20 +21,24 @@ Limitation 多すぎ。
 ※ Do not use following
 - space characters
 - comment out keyword `<<`
+- single quoted string, like as follow. Use double quoted string instead.
+  ```
+  -D'IN=1'
+  ```
 - return escaping `\`, like as follow
   ```
-  -D'QQQ(IN)=(IN? \
+  -D"QQQ(IN)=(IN? \
               TRUE: \
               FALSE \
-             )'
+             )"
   ```
 
 ↓ 同封のサンプルファイル `example\ex.c` の、`#define` 値、`XXX` と `QQQ(IN)` を有効にする例 ↓
 ```shellscript
 # < User Defintions >----------------------------
--D'XXX'
--D'IN=1'
--D'QQQ(IN)=(IN?1:0)'
+-D"XXX"
+-D"IN=1"
+-D"QQQ(IN)=(IN?1:0)"
 # ----------------------------</ User Defintions >
 ```
 
@@ -87,9 +89,6 @@ Limitation 多すぎ。
  - Cgywin の `gcc-core` 環境の場合  
    変換対象のソースコードのパスに日本語が入っていると `No such file or directory` がでることがある
 
- - MSYS2 の `mingw-w64-x86_64-gcc` 環境の場合  
-   `gcc macro names must be identifiers` エラーがでて失敗する
-
 ## `gcc -E` コマンドに起因するもの
 
  - ソースコード内の `#include` は無視する仕様。  
@@ -97,6 +96,9 @@ Limitation 多すぎ。
    その為、インクルードファイル内に `#ifdef` スイッチを制御するための `#define` 値を定義している場合は、  
    `gcc_option.sh` 内のオプションにその `#define` 値を定義して使用する。  
 
- - ソースコード内の改行コード `\r\n` が `\n` に変換されてしまう
+ - ソースコード内の改行コードがに変換されてしまう  
+    確認した限りで、  
+    Cygwin 環境版 gdb 8.1.1-1 の場合は、`\n`  
+    MSYS2 環境版 mingw-w64-x86_64-gdb-8.3-9 の場合は、`\r\n`
  - ファイルの最終行が空文字でない場合は、強制的に空行が付加される
   
