@@ -75,7 +75,7 @@ Limitation 多すぎ。注意。
 
 ↓ 同封の `example` フォルダを指定した例 ↓
 ```
-.\ifdef_switcher\ifdef_switcher.bat example > log.txt 2>&1
+.\ifdef_switcher\ifdef_switcher.bat example
 ```
 上記の例では、`example` フォルダの隣に、`example_switched` という、`_switched` が付加されたフォルダが生成される。
 

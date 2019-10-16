@@ -72,6 +72,7 @@ $listener_1st = {
     
     # $listener_1st で 変換した文字列の復活
     $str_line = $str_line -replace ' /\* {% tab_or_space %}((\t| )+){% tab_or_space %} \*/ '  , '$1'
+    $str_line = $str_line -replace ' /\* {% tab_or_space %}((\t| )+){% tab_or_space %} \*/$'  , '$1'
 
     # $listener_2nd で 変換した文字列の復活
     $str_line = $str_line -replace '/\* {% vacant_line %}(.*){% vacant_line %} \*/'  , '$1'
